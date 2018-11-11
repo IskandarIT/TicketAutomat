@@ -19,7 +19,7 @@ public class Ticketautomat
     private int bisherGezahlt;
     //Сумма денег, которая была ранее сделана этой машиной.
     private int gesamtsumme;
-    private int wechselgeld;
+    private int budget;
 
     /**
      *Создайте машину с билетами по данной цене
@@ -28,14 +28,31 @@ public class Ticketautomat
       * Машина не проверяет это
 
      */
-    public Ticketautomat(int ticketpreis)
-    {
-         preis = ticketpreis;
-         this.preis=25;
+    public Ticketautomat(int newpreis, int newpreis2, String ruskiy,String kirgiskiy)
+    {if(ruskiy=="Русский"){
+        System.out.print("Вы выбрали русский");
+    } if(kirgiskiy=="Киргизский"){
+      System.out.print("Вы выбрали киргизский ");  
+    }
+    
+         
+        budget =1000;
+        if(newpreis>budget){
+        preis=budget;
+        System.out.println("Вы ввели превыщающую цену билета"+budget);
+        }else{preis= newpreis;} 
         bisherGezahlt = 0;
         gesamtsumme = 0;
-        wechselgeld=0;
+        if(preis <=0){
+            preis=500;
+        System.out.println("Вы ввели неправильную цену,поэтому цена"+preis);;}
+        
     }
+    public Ticketautomat(){
+    preis=600;
+    bisherGezahlt=0;
+    gesamtsumme=0;
+}
    
 
     /**
@@ -61,8 +78,13 @@ public class Ticketautomat
      */
     public void geldEinwerfen(int betrag)
     {
+        
+        if(betrag<0){
+        betrag=0;
+    System.out.println("Вы ввели неправильную сумму для");
+    }
         bisherGezahlt = bisherGezahlt + betrag;
-        System.out.println(bisherGezahlt);
+  
     }
 
     /**
@@ -71,7 +93,7 @@ public class Ticketautomat
       * Сумма равна нулю.
      */
     public void ticketDrucken()
-    {
+    {if(bisherGezahlt >=preis){
          // Имитировать распечатку билета.
         System.out.println("##################");
         System.out.println("# Die BlueJ-Linie");
@@ -83,7 +105,9 @@ public class Ticketautomat
         //Обновите общую сумму с депонированной суммой
         gesamtsumme = gesamtsumme + bisherGezahlt;
         //Сброс предыдущего платежа.
-        bisherGezahlt = 0;
+        bisherGezahlt = 0;}
+        else{
+        System.out.println("Не хвата на билет"+(preis-bisherGezahlt)+" cent");}
     }
     /**
      * konsol viydet sotvetstvuyushiy summu
@@ -111,9 +135,15 @@ public class Ticketautomat
         gesamtsumme=0;
         
     }
-    public int preisSetzen(int preis){
-        return preis; 
-    
+    public void preisSetzen(int newPreis){
+        if(newPreis>budget){
+        preis=budget;
+    System.out.println("Вы ввели превышающую цену билета поэтому цена билета"+budget);
+}
+   else{preis=newPreis;}
+   if(preis<=0){
+    preis =500;
+    System.out.println("Вы ввели неправильную цену,поэтому цена"+preis);}    
     }
     /**
      * sdachi dayet
@@ -135,5 +165,6 @@ public class Ticketautomat
         System.out.println("Pojaluysta polozhite vvedeniy summu"+ betrag);
         }
     }
+    
 
 }
