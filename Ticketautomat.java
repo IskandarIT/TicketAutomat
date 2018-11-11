@@ -28,8 +28,13 @@ public class Ticketautomat
       * Машина не проверяет это
 
      */
-    public Ticketautomat(int newpreis, int newpreis2)
-    {
+    public Ticketautomat(int newpreis, int newpreis2, String ruskiy,String kirgiskiy)
+    {if(ruskiy=="Русский"){
+        System.out.print("Вы выбрали русский");
+    } if(kirgiskiy=="Киргизский"){
+      System.out.print("Вы выбрали киргизский ");  
+    }
+    
          
         budget =1000;
         if(newpreis>budget){
@@ -160,5 +165,6 @@ public class Ticketautomat
         System.out.println("Pojaluysta polozhite vvedeniy summu"+ betrag);
         }
     }
+    
 
 }
